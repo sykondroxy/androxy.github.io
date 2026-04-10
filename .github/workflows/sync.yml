@@ -15,5 +15,5 @@ jobs:
 
       - name: Push to Main Site Repo
         run: |
-          git remote add main_site https://x-access-token:${{ secrets.SYNC_TOKEN_60_DAYS }}@github.com/sykondroxy/androxy.github.io
+          git remote add main_site https://x-access-token:${{secrets.SYNC_TOKEN_60_DAYS}}@github.com/sykondroxy/androxy.github.io
           git push --force main_site main
