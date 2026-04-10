@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           # This tells GitHub to use YOUR token for all Git commands below
-          token: ${{ secrets.SYNC_TOKEN_60_DAYS }}
+          token: ${{  secrets.SYNC_TOKEN_60_DAYS  }}
           fetch-depth: 0
 
       - name: Push to Main Site Repo
