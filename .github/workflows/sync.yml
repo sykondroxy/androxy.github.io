@@ -11,12 +11,15 @@ jobs:
       - name: Checkout Main Repo
         uses: actions/checkout@v4
         with:
-          # Use the secret you just added to this repo
           token: ${{ secrets.SYNC_TOKEN_60_DAYS }}
           fetch-depth: 0
 
       - name: Push to Mirror Repo
         run: |
-          # Change MIRROR_REPO_NAME to the name of your second repo
           git remote add mirror_site https://github.com/sykondroxy/mirror.github.io.git
-          git push --force mirror_site main
+          git checkout -b mirror-push
+          git rm CNAME || echo "No CNAME found"
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git commit -m "Remove CNAME for mirror"
+          git push --force mirror_site mirror-push:main
