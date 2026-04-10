@@ -1,0 +1,22 @@
+name: Sync Main to Mirror
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  git-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Main Repo
+        uses: actions/checkout@v4
+        with:
+          # Use the secret you just added to this repo
+          token: ${{ secrets.SYNC_TOKEN_60_DAYS }}
+          fetch-depth: 0
+
+      - name: Push to Mirror Repo
+        run: |
+          # Change MIRROR_REPO_NAME to the name of your second repo
+          git remote add mirror_site https://github.com/sykondroxy/mirror.github.io.git
+          git push --force mirror_site main
