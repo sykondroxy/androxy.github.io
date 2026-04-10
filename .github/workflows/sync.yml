@@ -1,0 +1,19 @@
+name: Sync Mirror to Main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  git-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Mirror Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to Main Site Repo
+        run: |
+          git remote add main_site https://x-access-token:${{ secrets.SYNC_TOKEN_60_DAYS }}@://github.com/sykondroxy/androxy.github.io
+          git push --force main_site main
