@@ -11,9 +11,12 @@ jobs:
       - name: Checkout Mirror Repo
         uses: actions/checkout@v4
         with:
+          # This tells GitHub to use YOUR token for all Git commands below
+          token: ${{ secrets.SYNC_TOKEN_60_DAYS }}
           fetch-depth: 0
 
       - name: Push to Main Site Repo
         run: |
-          git remote add main_site https://x-access-token:${{ secrets.SYNC_TOKEN_60_DAYS }}@github.com/sykondroxy/androxy.github.io
+          # Use your real username and main repo name here
+          git remote add main_site https://github.com/sykondroxy/androxy.github.io.git
           git push --force main_site main
